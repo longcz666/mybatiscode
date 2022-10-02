@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blb.demo01.mapper.EmpMapper">
+
+    <resultMap id="BaseResultMap" type="com.blb.demo01.entity.Emp">
+            <result property="id" column="id" jdbcType="INTEGER"/>
+            <result property="workon" column="workon" jdbcType="VARCHAR"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="gender" column="gender" jdbcType="CHAR"/>
+            <result property="age" column="age" jdbcType="TINYINT"/>
+            <result property="idcard" column="idcard" jdbcType="CHAR"/>
+            <result property="entrydate" column="entrydate" jdbcType="DATE"/>
+            <result property="workaddress" column="workaddress" jdbcType="CHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,workon,name,
+        gender,age,idcard,
+        entrydate,workaddress
+    </sql>
+
+    <insert id="insertSelective">
+        insert into emp
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="workon != null">workon,</if>
+            <if test="name != null">name,</if>
+            <if test="gender != null">gender,</if>
+            <if test="age != null">age,</if>
+            <if test="idcard != null">idcard,</if>
+            <if test="entrydate != null">entrydate,</if>
+            <if test="workaddress != null">workaddress,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id,jdbcType=INTEGER},</if>
+            <if test="workon != null">#{workon,jdbcType=VARCHAR},</if>
+            <if test="name != null">#{name,jdbcType=VARCHAR},</if>
+            <if test="gender != null">#{gender,jdbcType=CHAR},</if>
+            <if test="age != null">#{age,jdbcType=TINYINT},</if>
+            <if test="idcard != null">#{idcard,jdbcType=CHAR},</if>
+            <if test="entrydate != null">#{entrydate,jdbcType=DATE},</if>
+            <if test="workaddress != null">#{workaddress,jdbcType=CHAR},</if>
+        </trim>
+    </insert>
+</mapper>
