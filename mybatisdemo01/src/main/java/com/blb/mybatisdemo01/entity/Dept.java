@@ -1,46 +1,39 @@
-package com.blb.demo01.entity;
+package com.blb.mybatisdemo01.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
- * 
- * @TableName books
+ * 部门表
+ * @TableName dept
  */
-@TableName(value ="books")
+@TableName(value ="dept")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Books implements Serializable {
+public class Dept implements Serializable {
     /**
-     * 编号
+     * ID
      */
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**
-     * 书名
+     * 部门名称
      */
-    private String bookTitle;
+    private String name;
 
-    /**
-     * 作者
-     */
-    private String author;
+    private List<Emp> emps;
 
-    /**
-     * 字数
-     */
-    private Integer zishu;
 
-    /**
-     * 价格
-     */
-    private Integer price;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

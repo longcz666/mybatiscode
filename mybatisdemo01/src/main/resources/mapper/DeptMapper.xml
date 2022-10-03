@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blb.mybatisdemo01.mapper.DeptMapper">
+
+    <resultMap id="BaseResultMap" type="com.blb.mybatisdemo01.entity.Dept">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name
+    </sql>
+
+    <select id="mySelectById" resultType="com.blb.mybatisdemo01.entity.Dept">
+        select *
+        from duobiaochaxun.dept
+        where id = #{deptId}
+    </select>
+
+    <resultMap id="deptAndEmpMap" type="com.blb.mybatisdemo01.entity.Dept">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <collection property="emps" ofType="com.blb.mybatisdemo01.entity.Emp">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+            <result property="age" column="age"/>
+            <result property="job" column="job"/>
+            <result property="salary" column="salary"/>
+            <result property="entrydate" column="entrydate"/>
+            <result property="managerid" column="managerid"/>
+            <result property="deptId" column="dept_id"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectDeptAndEmp" resultMap="deptAndEmpMap">
+        select *
+        from duobiaochaxun.dept
+                 left join duobiaochaxun.emp  on duobiaochaxun.dept.id = duobiaochaxun.emp.dept_id
+        where duobiaochaxun.dept.id = #{id}
+    </select>
+</mapper>

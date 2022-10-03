@@ -6,7 +6,7 @@
 
     <resultMap id="BaseResultMap" type="com.blb.demo01.entity.Books">
             <result property="id" column="id" jdbcType="INTEGER"/>
-            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="bookTitle" column="book_title" jdbcType="VARCHAR"/>
             <result property="author" column="author" jdbcType="VARCHAR"/>
             <result property="zishu" column="zishu" jdbcType="INTEGER"/>
             <result property="price" column="price" jdbcType="INTEGER"/>
@@ -16,4 +16,9 @@
         id,title,author,
         zishu,price
     </sql>
+
+    <select id="mySelectedBooks" resultType="com.blb.demo01.entity.Books">
+        select * from books
+    </select>
+
 </mapper>
