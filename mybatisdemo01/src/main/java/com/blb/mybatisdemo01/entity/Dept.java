@@ -24,12 +24,12 @@ public class Dept implements Serializable {
      * ID
      */
     @TableId(type = IdType.AUTO)
-    private Integer id;
+    private Integer did;
 
     /**
      * 部门名称
      */
-    private String name;
+    private String deptName;
 
     private List<Emp> emps;
 

@@ -18,6 +18,8 @@ public interface DeptMapper extends BaseMapper<Dept> {
     Dept mySelectById(Integer deptId);
 
     Dept selectDeptAndEmp(Integer id);
+
+    Dept selectDeptAndEmpStep(Integer did);
 }
 
 

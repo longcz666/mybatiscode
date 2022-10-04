@@ -20,8 +20,8 @@
     </select>
 
     <resultMap id="deptAndEmpMap" type="com.blb.mybatisdemo01.entity.Dept">
-        <id property="id" column="id"/>
-        <result property="name" column="name"/>
+        <id property="did" column="did"/>
+        <result property="deptName" column="dept_name"/>
         <collection property="emps" ofType="com.blb.mybatisdemo01.entity.Emp">
             <id property="id" column="id"/>
             <result property="name" column="name"/>
@@ -37,7 +37,19 @@
     <select id="selectDeptAndEmp" resultMap="deptAndEmpMap">
         select *
         from duobiaochaxun.dept
-                 left join duobiaochaxun.emp  on duobiaochaxun.dept.id = duobiaochaxun.emp.dept_id
-        where duobiaochaxun.dept.id = #{id}
+                 left join duobiaochaxun.emp on duobiaochaxun.dept.did = duobiaochaxun.emp.dept_id
+        where duobiaochaxun.dept.did = #{id}
+    </select>
+    <resultMap id="deptAndEmpStepMap" type="com.blb.mybatisdemo01.entity.Dept">
+        <id property="did" column="did"/>
+        <result property="deptName" column="dept_name"/>
+        <collection property="emps"
+                    select="com.blb.mybatisdemo01.mapper.EmpMapper.selectEmpAndDeptTwo"
+                    column="did">
+        </collection>
+    </resultMap>
+    
+    <select id="selectDeptAndEmpStep" resultMap="deptAndEmpStepMap">
+        select * from duobiaochaxun.dept where did = #{id}
     </select>
 </mapper>

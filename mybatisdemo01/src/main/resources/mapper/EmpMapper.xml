@@ -28,15 +28,15 @@
 
     <resultMap id="empAndDeptMap2" type="com.blb.mybatisdemo01.entity.Emp">
         <association property="dept" javaType="com.blb.mybatisdemo01.entity.Dept">
-            <id property="id" column="d.id"/>
-            <result property="name" column="d.name"/>
+            <id property="did" column="did"/>
+            <result property="deptName" column="dept_name"/>
         </association>
     </resultMap>
 
     <select id="getEmpAndDept" resultMap="empAndDeptMap2">
         select *
         from emp e
-                 left join dept d on e.dept_id = d.id
+                 left join dept d on e.dept_id = d.did
         where e.id = #{e.id};
     </select>
 
@@ -49,6 +49,13 @@
         select *
         from duobiaochaxun.emp
         where id = #{id}
+    </select>
+
+    <select id="selectEmpAndDeptTwo" resultType="com.blb.mybatisdemo01.entity.Emp">
+        select * from duobiaochaxun.emp where dept_id = #{did}
+    </select>
+    <select id="selectAllByPage" resultType="com.blb.mybatisdemo01.entity.Emp">
+        select * from duobiaochaxun.emp where emp.age > #{age}
     </select>
 
 </mapper>

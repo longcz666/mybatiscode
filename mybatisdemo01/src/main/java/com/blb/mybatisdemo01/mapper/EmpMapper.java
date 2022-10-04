@@ -1,8 +1,13 @@
 package com.blb.mybatisdemo01.mapper;
 
-import com.blb.mybatisdemo01.entity.Emp;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.blb.mybatisdemo01.entity.Emp;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
 * @author l'c'z
@@ -16,6 +21,13 @@ public interface EmpMapper extends BaseMapper<Emp> {
     Emp getEmpAndDept(Integer id);
 
     Emp selectEmpAndDept(Integer id);
+
+    List<Emp> selectEmpAndDeptTwo(@Param("did") Integer did);
+
+    @Select("select * from duobiaochaxun.emp where id = #{id}")
+    Emp mySelectById(Integer id);
+
+    Page<Emp> selectAllByPage(Page<Emp> page,Integer age);
 
 }
 
